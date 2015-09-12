@@ -1,0 +1,192 @@
+bps(120/120)
+-- 20150912
+-- Vague Five
+-- Grant Muller
+
+-- Just Kalimba
+d1 $ stack [
+  weave' 4 (slow 3 $ sound (samples "[kal2 ~ ~]*10" "0 3 5") |+| shape "0.5" |+| delay (scale 0.5 1 sinewave1) |+| delayfeedback (scale 0.25 0.9 sinewave1) |+| delaytime (slow 4 (scale 0.5 1 sinewave1)) |+| hcutoff (slow 4 $ (*0.1) <$> sine1) |+| hresonance "0.7") [(vowel "a i e i " |+|), (speed "[0.5 0.75 1, 1 1.5 2, 2 2.5 3]" |+|), (vowel "o o o o" |+|) ]
+]
+
+-- Bassline + Kalimba
+d1 $ stack [
+  weave' 4 (slow 3 $ sound (samples "[kal2 ~ ~]*10" "0 3 5") |+| shape "0.5" |+| delay (scale 0.5 1 sinewave1) |+| delayfeedback (scale 0.25 0.9 sinewave1) |+| delaytime (slow 4 (scale 0.5 1 sinewave1)) |+| hcutoff (slow 4 $ (*0.1) <$> sine1) |+| hresonance "0.7") [(vowel "a i e i " |+|), (speed "[0.5 0.75 1, 1 1.5 2]" |+|), (vowel "o o o o" |+|) ],
+   slow 3 $ sound "bass1 ~ ~ ~ ~ ~ bass1 ~ ~ ~ bass1 ~ ~ bass1 ~" |+| speed "1 1.2 1.8" |+| shape "0.6" |+| gain "1.2"
+]
+
+-- Remove Kicks
+d1 $ stack [
+  every 12 (0.5 <~) $ slow 6 $ sound "[sid:2*4 sid:2 ~ sn*4 sid:2 ~ sid:2*2 sid:2*4 ~ sid:2*4 sn ~ [sn ~ sn] [~ sn ~] sn*2]",
+  weave' 4 (slow 3 $ sound (samples "[kal2 ~ ~]*10" "0 3 5") |+| shape "0.5" |+| delay (scale 0.5 1 sinewave1) |+| delayfeedback (scale 0.25 0.9 sinewave1) |+| delaytime (slow 4 (scale 0.5 1 sinewave1)) |+| hcutoff (slow 4 $ (*0.1) <$> sine1) |+| hresonance "0.7") [(vowel "a i e i " |+|), (speed "[0.5 0.75 1, 1 1.5 2]" |+|), (vowel "o o o o" |+|) ],
+   slow 3 $ sound "bass1 ~ ~ ~ ~ ~ bass1 ~ ~ ~ bass1 ~ ~ bass1 ~" |+| speed "1 1.2 1.8" |+| shape "0.6" |+| gain "1.2"
+]
+
+-- Remove Clanky
+d1 $ stack [
+  slow 2 $ sound "[bd:8*4 bd*4 bd ~ BD:3*4 ~ bd*4 bd:10 bd bd*4]" |+| gain "1.3",
+  iter 2 $ sound (samples "macD macD macD*6 ~ ~ macD*2 ~ macD ~ macD*6" "{0 4 7 9}%5") |+| speed (scale 1 2 (rand)),
+  every 12 (0.5 <~) $ slow 6 $ sound "[sid:2*4 sid:2 ~ sn*4 sid:2 ~ sid:2*2 sid:2*4 ~ sid:2*4 sn ~ [sn ~ sn] [~ sn ~] sn*2]",
+  weave' 4 (slow 3 $ sound (samples "[kal2 ~ ~]*10" "0 3 5") |+| shape "0.5" |+| delay (scale 0.5 1 sinewave1) |+| delayfeedback (scale 0.25 0.9 sinewave1) |+| delaytime (slow 4 (scale 0.5 1 sinewave1)) |+| hcutoff (slow 4 $ (*0.1) <$> sine1) |+| hresonance "0.7") [(vowel "a i e i " |+|), (speed "[0.5 0.75 1, 1 1.5 2]" |+|), (vowel "o o o o" |+|) ],
+   slow 3 $ sound "bass1 ~ ~ ~ ~ ~ bass1 ~ ~ ~ bass1 ~ ~ bass1 ~" |+| speed "1 1.2 1.8" |+| shape "0.6" |+| gain "1.2"
+]
+
+-- Remove
+d1 $ stack [
+  slow 2 $ sound "[bd:8*4 bd*4 bd ~ BD:3*4 ~ bd*4 bd:10 bd bd*4]" |+| gain "1.3",
+  spread' iter "[2 4 3 5 1]" $ every 4 (density 2) $ slow 2 $ sound (samples "industrial industrial industrial industrial industrial*4 ~ ~ industrial industrial industrial*4" (irand 16)),
+  iter 2 $ sound (samples "macD macD macD*6 ~ ~ macD*2 ~ macD ~ macD*6" "{0 4 7 9}%5") |+| speed (scale 1 2 (rand)),
+  every 12 (0.5 <~) $ slow 6 $ sound "[sid:2*4 sid:2 ~ sn*4 sid:2 ~ sid:2*2 sid:2*4 ~ sid:2*4 sn ~ [sn ~ sn] [~ sn ~] sn*2]",
+  weave' 4 (slow 3 $ sound (samples "[kal2 ~ ~]*10" "0 3 5") |+| shape "0.5" |+| delay (scale 0.5 1 sinewave1) |+| delayfeedback (scale 0.25 0.9 sinewave1) |+| delaytime (slow 4 (scale 0.5 1 sinewave1)) |+| hcutoff (slow 4 $ (*0.1) <$> sine1) |+| hresonance "0.7") [(vowel "a i e i " |+|), (speed "[0.5 0.75 1, 1 1.5 2]" |+|), (vowel "o o o o" |+|) ],
+   slow 3 $ sound "bass1 ~ ~ ~ ~ ~ bass1 ~ ~ ~ bass1 ~ ~ bass1 ~" |+| speed "1 1.2 1.8" |+| shape "0.6" |+| gain "1.2"
+]
+
+-- Height of Progression
+d1 $ stack [
+  slow 2 $ sound "[bd:8*4 bd*4 bd ~ BD:3*4 ~ bd*4 bd:10 bd bd*4]" |+| gain "1.3",
+  spread' iter "[2 4 3 5 1]" $ every 4 (density 2) $ slow 2 $ sound (samples "industrial industrial industrial industrial industrial*4 ~ ~ industrial industrial industrial*4" (irand 16)),
+  iter 2 $ sound (samples "macD macD macD*6 ~ ~ macD*2 ~ macD ~ macD*6" "{0 4 7 9}%5") |+| speed (scale 1 2 (rand)),
+  every 12 (0.5 <~) $ slow 6 $ sound "[sid:2*4 sid:2 ~ sn*4 sid:2 ~ sid:2*2 sid:2*4 ~ sid:2*4 sn ~ [sn ~ sn] [~ sn ~] sn*2]",
+  spread' chop "[1 4 5 2 16]" $ sound "bass:1*10" |+| gain "1.2" |+| speed (slow 2 "1 0.8") |+| cutoff (slow 4 $ (*0.1) <$> sine1) |+| resonance "0.7",
+  weave' 4 (slow 3 $ sound (samples "[kal2 ~ ~]*10" "0 3 5") |+| shape "0.5" |+| delay (scale 0.5 1 sinewave1) |+| delayfeedback (scale 0.25 0.9 sinewave1) |+| delaytime (slow 4 (scale 0.5 1 sinewave1)) |+| hcutoff (slow 4 $ (*0.1) <$> sine1) |+| hresonance "0.7") [(vowel "a i e i " |+|), (speed "[0.5 0.75 1, 1 1.5 2]" |+|), (vowel "o o o o" |+|) ],
+   slow 3 $ sound "bass1 ~ ~ ~ ~ ~ bass1 ~ ~ ~ bass1 ~ ~ bass1 ~" |+| speed "1 1.2 1.8" |+| shape "0.6" |+| gain "1.2"
+]
+
+-- Bassline + effects
+d1 $ stack [
+  slow 2 $ sound "[bd:8*4 bd*4 bd ~ BD:3*4 ~ bd*4 bd:10 bd bd*4]" |+| gain "1.3",
+  spread' iter "[2 4 3 5 1]" $ every 4 (density 2) $ slow 2 $ sound (samples "industrial industrial industrial industrial industrial*4 ~ ~ industrial industrial industrial*4" (irand 16)),
+  iter 2 $ sound (samples "macD macD macD*6 ~ ~ macD*2 ~ macD ~ macD*6" "{0 4 7 9}%5") |+| speed (scale 1 2 (rand)),
+  every 12 (0.5 <~) $ slow 6 $ sound "[sid:2*4 sid:2 ~ sn*4 sid:2 ~ sid:2*2 sid:2*4 ~ sid:2*4 sn ~ [sn ~ sn] [~ sn ~] sn*2]",
+  spread' chop "[1 4 5 2 16]" $ sound "bass:1*10" |+| gain "1.2" |+| speed (slow 2 "1 0.8") |+| cutoff (slow 4 $ (*0.1) <$> sine1) |+| resonance "0.7",
+  slowspread ($) [jux(rev), jux(chop 16), jux(striate 16), stut 16 0.1 0.1] $ slow 3 $ sound (samples "[kal2 ~ ~]*10" "0 3 5") |+| shape "0.5" |+| delay (scale 0.5 1 sinewave1) |+| delayfeedback (scale 0.25 0.9 sinewave1) |+| delaytime (slow 4 (scale 0.5 1 sinewave1)) |+| hcutoff (slow 4 $ (*0.1) <$> sine1) |+| hresonance "0.7",
+   slow 3 $ sound "bass1 ~ ~ ~ ~ ~ bass1 ~ ~ ~ bass1 ~ ~ bass1 ~" |+| speed "1 1.2 1.8" |+| shape "0.6" |+| gain "1.2"
+]
+
+-- Bassline Added
+d1 $ stack [
+  slow 2 $ sound "[bd:8*4 bd*4 bd ~ BD:3*4 ~ bd*4 bd:10 bd bd*4]" |+| gain "1.3",
+  spread' iter "[2 4 3 5 1]" $ every 4 (density 2) $ slow 2 $ sound (samples "industrial industrial industrial industrial industrial*4 ~ ~ industrial industrial industrial*4" (irand 16)),
+  iter 2 $ sound (samples "macD macD macD*6 ~ ~ macD*2 ~ macD ~ macD*6" "{0 4 7 9}%5") |+| speed (scale 1 2 (rand)),
+  every 12 (0.5 <~) $ slow 6 $ sound "[sid:2*4 sid:2 ~ sn*4 sid:2 ~ sid:2*2 sid:2*4 ~ sid:2*4 sn ~ [sn ~ sn] [~ sn ~] sn*2]",
+  spread' chop "[1 4 5 2 16]" $ sound "bass:1*10" |+| gain "1.2" |+| speed (slow 4 "1 0.8") |+| cutoff (slow 4 $ (*0.1) <$> sine1) |+| resonance "0.7",
+  stut 16 0.1 0.1 $ slow 3 $ sound (samples "[kal2 ~ ~]*10" "0 3 5") |+| shape "0.5" |+| delay (scale 0.5 1 sinewave1) |+| delayfeedback (scale 0.25 0.9 sinewave1) |+| delaytime (slow 4 (scale 0.5 1 sinewave1)) |+| hcutoff (slow 4 $ (*0.1) <$> sine1) |+| hresonance "0.7",
+  slow 3 $ sound "bass1 ~ ~ ~ ~ ~ bass1 ~ ~ ~ bass1 ~ ~ bass1 ~" |+| speed "1 1.2 1.8" |+| shape "0.6" |+| gain "1.2"
+]
+
+-- Kalimba Scale + Filter Sweeps
+d1 $ stack [
+  slow 2 $ sound "[bd:8*4 bd*4 bd ~ BD:3*4 ~ bd*4 bd:10 bd bd*4]" |+| gain "1.3",
+  spread' iter "[2 4 3 5 1]" $ every 4 (density 2) $ slow 2 $ sound (samples "industrial industrial industrial industrial industrial*4 ~ ~ industrial industrial industrial*4" (irand 16)),
+  iter 2 $ sound (samples "macD macD macD*6 ~ ~ macD*2 ~ macD ~ macD*6" "{0 4 7 9}%5") |+| speed (scale 1 2 (rand)),
+  every 12 (0.5 <~) $ slow 6 $ sound "[sid:2*4 sid:2 ~ sn*4 sid:2 ~ sid:2*2 sid:2*4 ~ sid:2*4 sn ~ [sn ~ sn] [~ sn ~] sn*2]",
+  spread' chop "[1 4 5 2 16]" $ sound "bass:1*10" |+| gain "1.2" |+| speed (slow 4 "1 0.8") |+| cutoff (slow 4 $ (*0.1) <$> sine1) |+| resonance "0.7",
+  stut 16 0.1 0.1 $ slow 3 $ sound (samples "[kal2 ~ ~]*10" "0 3 5") |+| shape "0.5" |+| delay (scale 0.5 1 sinewave1) |+| delayfeedback (scale 0.25 1 sinewave1) |+| delaytime (slow 4 (scale 0.5 1 sinewave1))
+]
+
+-- Kalimba Scale
+d1 $ stack [
+  slow 2 $ sound "[bd:8*4 bd*4 bd ~ BD:3*4 ~ bd*4 bd:10 bd bd*4]" |+| gain "1.3",
+  spread' iter "[2 4 3 5 1]" $ every 4 (density 2) $ slow 2 $ sound (samples "industrial industrial industrial industrial industrial*4 ~ ~ industrial industrial industrial*4" (irand 16)),
+  iter 2 $ sound (samples "macD macD macD*6 ~ ~ macD*2 ~ macD ~ macD*6" "{0 4 7 9}%5") |+| speed (scale 1 2 (rand)),
+  every 12 (0.5 <~) $ slow 6 $ sound "[sid:2*4 sid:2 ~ sn*4 sid:2 ~ sid:2*2 sid:2*4 ~ sid:2*4 sn ~ [sn ~ sn] [~ sn ~] sn*2]",
+  spread' chop "[1 4 5 2 16]" $ sound "bass:1*10" |+| gain "1.2" |+| speed (slow 4 "1 0.8"),
+  stut 16 0.1 0.1 $ slow 3 $ sound (samples "[kal2 ~ ~]*10" "0 3 5") |+| shape "0.5" |+| delay (scale 0.5 1 sinewave1) |+| delayfeedback (scale 0.25 1 sinewave1) |+| delaytime (slow 4 (scale 0.5 1 sinewave1))
+]
+
+-- Single Note Kalimba
+d1 $ stack [
+  slow 2 $ sound "[bd:8*4 bd*4 bd ~ BD:3*4 ~ bd*4 bd:10 bd bd*4]" |+| gain "1.3",
+  spread' iter "[2 4 3 5 1]" $ every 4 (density 2) $ slow 2 $ sound (samples "industrial industrial industrial industrial industrial*4 ~ ~ industrial industrial industrial*4" (irand 16)),
+  iter 2 $ sound (samples "macD macD macD*6 ~ ~ macD*2 ~ macD ~ macD*6" "{0 4 7 9}%5") |+| speed (scale 1 2 (rand)),
+  every 12 (0.5 <~) $ slow 6 $ sound "[sid:2*4 sid:2 ~ sn*4 sid:2 ~ sid:2*2 sid:2*4 ~ sid:2*4 sn ~ [sn ~ sn] [~ sn ~] sn*2]",
+  spread' chop "[1 4 5 2 16]" $ sound "bass:1*10" |+| gain "1.2" |+| speed (slow 4 "1 0.8"),
+  slow 3 $ sound (samples "[kal2 ~ ~]*10" "5") |+| shape "0.7"
+]
+
+-- Repetitive Bass 2 Note
+d1 $ stack [
+  slow 2 $ sound "[bd:8*4 bd*4 bd ~ BD:3*4 ~ bd*4 bd:10 bd bd*4]" |+| gain "1.3",
+  spread' iter "[2 4 3 5 1]" $ every 4 (density 2) $ slow 2 $ sound (samples "industrial industrial industrial industrial industrial*4 ~ ~ industrial industrial industrial*4" (irand 16)),
+  iter 2 $ sound (samples "macD macD macD*6 ~ ~ macD*2 ~ macD ~ macD*6" "{0 4 7 9}%5") |+| speed (scale 1 2 (rand)),
+  every 12 (0.5 <~) $ slow 6 $ sound "[sid:2*4 sid:2 ~ sn*4 sid:2 ~ sid:2*2 sid:2*4 ~ sid:2*4 sn ~ [sn ~ sn] [~ sn ~] sn*2]",
+  spread' chop "[1 4 5 2 16]" $ sound "bass:1*10" |+| gain "1.2" |+| speed (slow 4 "1 0.8")
+]
+
+-- Repetitive Bass + Effects
+d1 $ stack [
+  slow 2 $ sound "[bd:8*4 bd*4 bd ~ BD:3*4 ~ bd*4 bd:10 bd bd*4]" |+| gain "1.3",
+  spread' iter "[2 4 3 5 1]" $ every 4 (density 2) $ slow 2 $ sound (samples "industrial industrial industrial industrial industrial*4 ~ ~ industrial industrial industrial*4" (irand 16)),
+  slowspread ($) [density 1, chop 8, striate 16, (0.25 <~)] $ iter 2 $ sound (samples "macD macD macD*6 ~ ~ macD*2 ~ macD ~ macD*6" "{0 4 7 9}%5") |+| speed (scale 2 4 (rand)),
+  every 12 (0.5 <~) $ slow 6 $ sound "[sid:2*4 sid:2 ~ sn*4 sid:2 ~ sid:2*2 sid:2*4 ~ sid:2*4 sn ~ [sn ~ sn] [~ sn ~] sn*2]",
+  spread' chop "[1 4 5 2 16]" $ sound "bass:1*10" |+| gain "1.2"
+]
+
+-- Repetitive Bass
+d1 $ stack [
+  slow 2 $ sound "[bd:8*4 bd*4 bd ~ BD:3*4 ~ bd*4 bd:10 bd bd*4]" |+| gain "1.3",
+  spread' iter "[2 4 3 5 1]" $ every 4 (density 2) $ slow 2 $ sound (samples "industrial industrial industrial industrial industrial*4 ~ ~ industrial industrial industrial*4" (irand 16)),
+  every 12 (0.5 <~) $ slow 6 $ sound "[sid:2*4 sid:2 ~ sn*4 sid:2 ~ sid:2*2 sid:2*4 ~ sid:2*4 sn ~ [sn ~ sn] [~ sn ~] sn*2]",
+  slowspread ($) [density 1, chop 8, striate 16, (0.25 <~)] $ iter 2 $ sound (samples "macD macD macD*6 ~ ~ macD*2 ~ macD ~ macD*6" "{0 4 7 9}%5") |+| speed (scale 1 2 (rand)),
+  spread' chop "[1 4 5 2 16]" $ sound "bass:1*10" |+| gain "1.2"
+]
+
+-- Full Clank + Effects 3
+d1 $ stack [
+  slow 2 $ sound "[bd:8*4 bd*4 bd ~ BD:3*4 ~ bd*4 bd:10 bd bd*4]" |+| gain "1.2",
+  spread' iter "[2 4 3 5 1]" $ every 4 (density 2) $ slow 2 $ sound (samples "industrial industrial industrial industrial industrial*4 ~ ~ industrial industrial industrial*4" (irand 16)),
+  every 12 (0.5 <~) $ slow 6 $ sound "[sid:2*4 sid:2 ~ sn*4 sid:2 ~ sid:2*2 sid:2*4 ~ sid:2*4 sn ~ [sn ~ sn] [~ sn ~] sn*2]",
+  slowspread ($) [density 1, chop 8, striate 16, (0.25 <~)] $ iter 2 $ sound (samples "macD macD macD*6 ~ ~ macD*2 ~ macD ~ macD*6" "{0 4 7 9}%5") |+| speed (scale 1 2 (rand))
+]
+
+-- Full Clank + Effects 2
+d1 $ stack [
+  iter 5 $ slow 2 $ sound "[bd:8*4 bd*4 bd ~ BD:3*4 ~ bd*4 bd:10 bd bd*4]",
+  every 4 (density 2) $ slow 2 $ sound (samples "industrial industrial industrial industrial industrial*4 ~ ~ industrial industrial industrial*4" (irand 16)),
+  every 12 (0.5 <~) $ slow 6 $ sound "[sid:2*4 sid:2 ~ sn*4 sid:2 ~ sid:2*2 sid:2*4 ~ sid:2*4 sn ~ [sn ~ sn] [~ sn ~] sn*2]",
+  slowspread ($) [density 1, chop 8, striate 16, (0.25 <~)] $ iter 2 $ sound (samples "macD macD macD*6 ~ ~ macD*2 ~ macD ~ macD*6" "{0 4 7 9}%5") |+| speed (scale 1 2 (rand))
+]
+
+-- Full Clank + Effects
+d1 $ stack [
+  iter 5 $ slow 2 $ sound "[bd:8*4 bd*4 bd ~ bd:3*4 ~ bd*4 bd:10 bd bd*4]",
+  sound "industrial:1*5",
+  every 12 (0.5 <~) $ slow 6 $ sound "[sid:2*4 sid:2 ~ sn*4 sid:2 ~ sid:2*2 sid:2*4 ~ sid:2*4 sn ~ [sn ~ sn] [~ sn ~] sn*2]",
+  every 4 (density 2) $ slow 2 $ sound (samples "industrial industrial industrial industrial industrial*4 ~ ~ industrial industrial industrial*4" (irand 16)),
+  slowspread ($) [density 1, chop 8, striate 32, (0.25 <~)] $ iter 2 $ sound (samples "macD macD macD*6 ~ ~ macD*2 ~ macD ~ macD*6" "{0 4 7 9}%5") |+| speed (scale 1 2 (rand))
+]
+
+-- Full Clank
+d1 $ stack [
+  iter 5 $ slow 2 $ sound "[bd:8*4 bd*4 bd ~ bd:3*4 ~ bd*4 bd:10 bd bd*4]",
+  sound "industrial:1*5",
+  every 12 (0.5 <~) $ slow 6 $ sound "[sid:2*4 sid:2 ~ sn*4 sid:2 ~ sid:2*2 sid:2*4 ~ sid:2*4 sn ~ [sn ~ sn] [~ sn ~] sn*2]",
+  slow 2 $ sound (samples "industrial industrial industrial industrial industrial*4 ~ ~ industrial industrial industrial*4" (irand 16)),
+  iter 2 $ sound (samples "macD macD macD*6 ~ ~ macD*2 ~ macD ~ macD*6" "{0 2 7 9}%5") |+| speed (scale 1 2 (rand))
+]
+
+-- quiet loop
+d1 $ stack [
+  iter (5) $ slow 2 $ sound "[bd:8*4 bd*4 bd ~ bd:3*4 ~ bd*4 bd:10 bd bd*4]",
+  sound "industrial:1*5",
+  every 12 (0.5 <~) $ slow 6 $ sound "[sid:2*4 sid:2 ~ sn*4 sid:2 ~ sid:2*2 sid:2*4 ~ sid:2*4 sn ~ [sn ~ sn] [~ sn ~] sn*2]",
+  sound "macD macD macD*6 ~ ~ macD*2 ~ macD ~ macD*6"
+]
+
+-- clanky
+d1 $ stack [
+  iter (5) $ slow 2 $ sound "[bd:8*4 bd*4 bd ~ bd:3*4 ~ bd*4 bd:10 bd bd*4]",
+  sound "industrial:1*5",
+  slow 2 $ sound (samples "industrial industrial industrial industrial industrial*4 ~ ~ industrial industrial industrial*4" (irand 16))
+]
+
+-- Intro
+d1 $ stack [
+  slow 2 $ sound "[bd:8*4 bd*4 bd ~ bd:3*4 ~ bd*4 bd:10 bd bd*4]",
+  every 12 (0.5 <~) $ slow 6 $ sound "[sid:2*4 sid:2 ~ sn*4 sid:2 ~ sid:2*2 sid:2*4 ~ sid:2*4 sn ~ [sn ~ sn] [~ sn ~] sn*2]",
+  sound "industrial:1*5"
+]
+
+-- Examples rhythms
+d1 $ slow 2 $ sound "[bd:8*4 bd*4 bd ~ bd:3*4 ~ bd*4 bd:10 bd bd*4]"
+
+d1 $ slow 6 $ sound "[~ sn*4 sn ~ sn*4 sn sn*2 sn*4 ~ sn*4 sn ~ [sn ~ sn] [~ sn ~] sn*4]"
