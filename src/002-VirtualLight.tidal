@@ -1,0 +1,142 @@
+cps(135/240)
+-- 20150915
+-- Virtual Light
+-- Grant Muller
+
+-- Intro
+d1 $ stack [
+  slow 8 $ weave 4 (shape (scale 0 0.8 sinewave1))
+  [slowspread ($) [(|+| speed "0.25"), (|+| speed "0.3 0.4")] $ density 2 $ (striate' 8 0.2 $ sound (samples "latibro*8" (irand 7)))]
+  |+| gain "1.1"
+]
+
+-- House Kicks
+d1 $ stack [
+  slow 8 $ weave 4 (shape (scale 0 0.8 sinewave1))
+  [(striate' 16 0.08 $ sound (samples "jungbass:14*8" (irand 7))) |+| gain "0.7",
+  slowspread ($) [(|+| speed "0.25"), (|+| speed "0.3 0.4")] $ density 2 $ (striate' 8 0.2 $ sound (samples "latibro*8" (irand 7)))] |+| gain "1.1",
+  slow 2 $ slowcat [
+    sound "[house2 ! ! ! ! ! ! [house2 ! ~ house2]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2 ! ~ house2]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2 !]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2*4]]"]
+  |+| gain "1.4"
+]
+
+-- Piano Tones
+d1 $ stack [
+  slow 8 $ weave 4 (shape (scale 0 0.8 sinewave1))
+  [(striate' 16 0.08 $ sound (samples "jungbass:14*8" (irand 7))) |+| gain "0.7",
+  slowspread ($) [(|+| speed "0.25"), (|+| speed "0.3 0.4")] $ density 2 $ (striate' 8 0.2 $ sound (samples "latibro*8" (irand 7)))] |+| gain "1.1",
+  slow 2 $ slowcat [
+    sound "[house2 ! ! ! ! ! ! [house2 ! ~ house2]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2 ! ~ house2]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2 !]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2*4]]"]
+  |+| gain "1.4",
+  stut 16 0.2 0.2 $ slow 8 $ sound "1000p ~ ~ 1000p ~ ~ ~ 1000p" |+| gain "1.15" |+| speed "0.4 0.8 1.25"
+]
+
+-- Add Percussion
+d1 $ stack [
+  slow 8 $ weave 4 (shape (scale 0 0.8 sinewave1))
+  [(striate' 16 0.08 $ sound (samples "jungbass:14*8" (irand 7))) |+| gain "0.7",
+  slowspread ($) [(|+| speed "0.25"), (|+| speed "0.3 0.4")] $ density 2 $ (striate' 8 0.2 $ sound (samples "latibro*8" (irand 7)))] |+| gain "1.1",
+  every 4 (iter 2) $ sound "[BD ~ ~ ~ BD:8 ~ [jazz*2]/2 [jazz*2]/2 [jazz*2]/2 ~ BD:3 feel:1 made:3 ~ ~ feel:8]" |+| shape "0.5" |+| delaytime "0.9" |+| delayfeedback "0.7",
+  slow 2 $ slowcat [
+    sound "[house2 ! ! ! ! ! ! [house2 ! ~ house2]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2 ! ~ house2]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2 !]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2*4]]"]
+  |+| gain "1.4",
+  stut 16 0.2 0.2 $ slow 8 $ sound "1000p ~ ~ 1000p ~ ~ ~ 1000p" |+| gain "1.15" |+| speed "0.4 0.8 1.25"
+]
+
+-- Add 16th notes
+d1 $ stack [
+  slow 8 $ weave 4 (shape (scale 0 0.8 sinewave1))
+  [(striate' 16 0.08 $ sound (samples "jungbass:14*8" (irand 7))) |+| gain "0.7",
+  slowspread ($) [(|+| speed "0.25"), (|+| speed "0.3 0.4")] $ density 2 $ (striate' 8 0.2 $ sound (samples "latibro*8" (irand 7)))] |+| gain "1.1",
+  every 4 (iter 2) $ sound "[BD ~ ~ ~ BD:8 ~ [jazz*2]/2 [jazz*2]/2 [jazz*2]/2 ~ BD:3 feel:1 made:3 ~ ~ feel:8]" |+| shape "0.5" |+| delaytime "0.9" |+| delayfeedback "0.7" |+| gain "1.1",
+  sound "can*16" |+| speed (slow 4 (scale 0.95 1.1 sinewave1)) |+| accelerate "0.6",
+  slow 2 $ slowcat [
+    sound "[house2 ! ! ! ! ! ! [house2 ! ~ house2]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2 ! ~ house2]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2 !]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2*4]]"]
+  |+| gain "1.5",
+  stut 16 0.2 0.2 $ slow 8 $ sound "1000p ~ ~ 1000p ~ ~ ~ 1000p" |+| gain "1.15" |+| speed "0.4 0.8 1.25"
+]
+
+-- SNARE!
+d1 $ stack [
+  slow 8 $ weave 4 (shape (scale 0 0.8 sinewave1))
+  [(striate' 16 0.08 $ sound (samples "jungbass:14*8" (irand 7))) |+| gain "0.7",
+  slowspread ($) [(|+| speed "0.25"), (|+| speed "0.3 0.4")] $ density 2 $ (striate' 8 0.2 $ sound (samples "latibro*8" (irand 7)))] |+| gain "1.1",
+  every 4 (iter 2) $ sound "[BD ~ ~ ~ BD:8 ~ [jazz*2]/2 [jazz*2]/2 [jazz*2]/2 ~ BD:3 feel:1 made:3 ~ ~ feel:8]" |+| shape "0.5" |+| delaytime "0.9" |+| delayfeedback "0.7" |+| gain "1.1",
+  sound "can*16" |+| speed (slow 4 (scale 0.95 1.1 sinewave1)) |+| accelerate "0.6",
+  slow 2 $ slowcat [
+    sound "[house2 ! ! ! ! ! ! [house2 ! ~ house2]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2 ! ~ house2]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2 !]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2*4]]"]
+  |+| gain "1.5",
+  sound "~ sn:15 ~ sn:15" |+| gain "1.1",
+  stut 16 0.2 0.2 $ slow 4 $ sound "1000p ~ ~ 1000p:2" |+| gain "1.2" |+| speed "0.4 0.8"
+]
+
+-- Lose the Piano
+d1 $ stack [
+  slow 8 $ weave 4 (shape (scale 0 0.8 sinewave1))
+  [(striate' 16 0.08 $ sound (samples "jungbass:14*8" (irand 7))) |+| gain "0.7",
+  slowspread ($) [(|+| speed "0.25"), (|+| speed "0.3 0.4")] $ density 2 $ (striate' 8 0.2 $ sound (samples "latibro*8" (irand 7)))] |+| gain "1.1",
+  every 4 (iter 2) $ sound "[BD ~ ~ ~ BD:8 ~ [jazz*2]/2 [jazz*2]/2 [jazz*2]/2 ~ BD:3 feel:1 made:3 ~ ~ feel:8]" |+| shape "0.5" |+| delaytime "0.9" |+| delayfeedback "0.7" |+| gain "1.1",
+  sound "can*16" |+| speed (slow 4 (scale 0.95 1.1 sinewave1)) |+| accelerate "0.6",
+  slow 2 $ slowcat [
+    sound "[house2 ! ! ! ! ! ! [house2 ! ~ house2]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2 ! ~ house2]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2 !]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2*4]]"]
+  |+| gain "1.5",
+  sound "~ sn:15 ~ sn:15" |+| gain "1.1"
+  ]
+
+-- Drop the house
+d1 $ stack [
+  slow 8 $ weave 4 (shape (scale 0 0.8 sinewave1))
+  [(striate' 16 0.08 $ sound (samples "jungbass:14*8" (irand 7))) |+| gain "0.7",
+  slowspread ($) [(|+| speed "0.25"), (|+| speed "0.3 0.4")] $ density 2 $ (striate' 8 0.2 $ sound (samples "latibro*8" (irand 7)))] |+| gain "1.1",
+  every 4 (iter 2) $ sound "BD ~ ~ ~ BD:8 ~ [jazz*2]/2 [jazz*2]/2 [jazz*2]/2 ~ BD:3 feel:1 made:3 ~ ~ feel:8" |+| shape "0.5" |+| delaytime "0.9" |+| delayfeedback "0.7" |+| gain "1.1",
+  sound "can*16" |+| speed (slow 4 (scale 0.95 1.1 sinewave1)) |+| accelerate "0.6"
+  ]
+
+-- Drop the 16th notes
+d1 $ stack [
+  slow 8 $ weave 4 (shape (scale 0 0.8 sinewave1))
+  [(striate' 16 0.08 $ sound (samples "jungbass:14*8" (irand 7))) |+| gain "0.7",
+  slowspread ($) [(|+| speed "0.25"), (|+| speed "0.3 0.4")] $ density 2 $ (striate' 8 0.2 $ sound (samples "latibro*8" (irand 7)))] |+| gain "1.1",
+  every 4 (iter 2) $ sound "bd ~ ~ ~ bd ~ [jazz*2]/2 [jazz*2]/2 [jazz*2]/2 ~ bd feel:1 made:3 ~ ~ feel:8" |+| shape "0.5"
+]
+
+-- Soften Percussion
+d1 $ stack [
+  slow 8 $ weave 4 (shape (scale 0 0.8 sinewave1))
+  [(striate' 16 0.08 $ sound (samples "jungbass:14*8" (irand 7))) |+| gain "0.7",
+  slowspread ($) [(|+| speed "0.25"), (|+| speed "0.3 0.4")] $ density 2 $ (striate' 8 0.2 $ sound (samples "latibro*8" (irand 7)))] |+| gain "1.1",
+  sound "bd ~ ~ ~ bd ~ [jazz*2]/2 [jazz*2]/2 [jazz*2]/2 ~ bd feel:1 made:3 ~ ~ feel:8" |+| shape "0.5"
+]
+
+-- Outro House
+d1 $ stack [
+  slow 8 $ weave 4 (shape (scale 0 0.8 sinewave1))
+  [(striate' 16 0.08 $ sound (samples "jungbass:14*8" (irand 7))) |+| gain "0.7"]
+  |+| gain "1.1",
+  slow 2 $ slowcat [
+    sound "[house2 ! ! ! ! ! ! [house2 ! ~ house2]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2 ! ~ house2]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2 !]]",
+    sound "[house2 ! ! ! ! ! [house2 !] [house2*4]]"]
+  |+| gain "1.4"
+]
+
+hush
