@@ -1,0 +1,45 @@
+bps(185/120)
+-- 20150926
+-- Idle Chit Chat
+-- Grant Muller
+
+
+-- Start on a cycle
+let cyc _ [] = silence
+    cyc _ (p:[]) = p
+    cyc now (p':p:_) = whenT (> (nextSam now)) (const p') p
+
+d2 $ slow 16 $ striate 256 $ sound "amb" |+| gain "1.2"
+
+d1 $ stack [
+  slow 8 $ sound "bass1 ~ ~ [~ bass1] bass1 ~ ~ ~"  |+| speed "0.9 1.2 0.8 ~",
+  sound "bass:4" |+| speed "0.7",
+  slow 4 $ sound (samples "macD*16" (run 16)) |+| unit "c" |+| speed "4",
+  slow 3 $ sound "[jazz jazz*3 ~ jazz:2 ~ [jazz:3*4 ~] jazz:2 ~]" |+| speed (scale 0.8 1.2 (slow 4 sinewave1)),
+  whenmod 8 4 (|+| speed "1.059") $ spread' striate "[4]" $ slow 3 $ sound (samples "latibro*6" (run 8)) |+| gain "0.85" |+| speed "0.8",
+  ((1/8) <~) $ sound "bd*4? bd bd ~ sn bd jazz? gretsch:3?"
+]
+
+-- Developed Loop
+d1 $ stack [
+  slow 8 $ sound "bass1 ~ ~ [~ bass1] bass1 ~ ~ ~"  |+| speed "0.9 1.2 0.8 ~",
+  sound "bass:4" |+| speed "0.7",
+  slow 4 $ sound (samples "macD*16" (run 16)) |+| unit "c" |+| speed "4",
+  slow 3 $ sound "[jazz jazz*3 ~ jazz:2 ~ [jazz:3*4 ~] jazz:2 ~]" |+| speed (scale 0.8 1.2 (slow 4 sinewave1)),
+  whenmod 8 4 (|+| speed "1.059") $ spread' striate "[4]" $ slow 3 $ sound (samples "latibro*6" (run 8)) |+| gain "0.85" |+| speed "0.8"
+]
+
+-- Add drum interest
+d1 $ stack [
+  slow 8 $ sound "bass1 ~ ~ [~ bass1] bass1 ~ ~ ~"  |+| speed "0.9 1.2 0.8 ~",
+  sound "bass:4" |+| speed "0.7",
+  slow 4 $ sound (samples "macD*16" (run 16)) |+| unit "c" |+| speed "4",
+  slow 3 $ sound "[jazz jazz*3 ~ jazz:2 ~ [jazz:3*4 ~] jazz:2 ~]" |+| speed (scale 0.8 1.2 (slow 4 sinewave1))
+]
+
+-- Main drums and bass
+t1 cyc $ stack [
+  slow 8 $ sound "bass1 ~ ~ [~ bass1] bass1 ~ ~ ~"  |+| speed "0.9 1.2 0.8 ~" |+| gain "1.1",
+  sound "bass:4" |+| speed "0.7",
+  slow 4 $ sound (samples "macD*16" (run 16)) |+| unit "c" |+| speed "4"
+]
