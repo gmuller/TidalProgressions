@@ -1,0 +1,69 @@
+bps(185/120)
+
+let cyc _ [] = silence
+    cyc _ (p:[]) = p
+    cyc now (p':p:_) = whenT (> (nextSam now)) (const p') p
+
+t1 cyc $ silence
+
+t1 cyc $ stack [
+  jux(density 2) $ every 4 (0.25 <~) $ jux (|+| speed "1.5")
+  $ brak $ sound "~ jvbass*20 ~ BD*4 ~ bass:3*3 sn ~"
+  |+| speed (slow 4 "[0 2 -2 5]")
+  |+| gain "0.9"
+]
+
+t1 cyc $ stack [
+jux(density 2) $ every 4 (0.25 <~) $ jux (|+| speed "1.5")
+  $ brak $ sound "~ jvbass*20 ~ BD*4 ~ bass:3*3 sn ~"
+  |+| accelerate "[4 0 -3]/5"
+  |+| speed (slow 4 "[0 2 -2 5]")
+  |+| gain "0.9"
+]
+
+t1 cyc $ stack [
+  slowspread ($) [chop 8, stut 8 0.1 0.1, jux (striate 16 .rev), jux(slow 2)] $ jux(density 2) $ every 4 (0.25 <~) $ jux (|+| speed "1.5")
+  $ brak $ sound "~ jvbass*20 ~ BD*4 ~ bass:3*3 sn ~"
+  |+| accelerate "[4 0 -3]/5"
+  |+| speed (slow 4 "[0 2 -2 5]")
+  |+| gain "0.9"
+]
+
+t1 cyc $ stack [
+  slowspread ($) [chop 4, stut 8 0.1 0.1, jux (striate 16 .rev), jux(slow 2)] $ jux(density 2) $ every 4 (0.25 <~) $ jux (|+| speed "1.5")
+  $ brak $ sound "~ jvbass*20 ~ BD*4 ~ bass:3*3 sn ~"
+  |+| accelerate "[4 0 -3]/5"
+  |+| speed (slow 4 "[0 2 -2 5]")
+  |+| gain "0.9",
+  jux (density 2) $ brak $ sound "[jazz jazz jazz [~ BD BD SN], jazz:3*8]" |+| shape "0.9"
+]
+
+t1 cyc $ stack [
+  jux (density 2) $ brak $ sound "[jazz jazz jazz [~ BD BD SN], jazz:3*8]" |+| shape "0.9"
+]
+
+t1 cyc $ stack [
+  jux (density 2) $ brak $ sound "[jazz jazz jazz [~ BD BD SN]]" |+| shape "0.9"
+]
+
+t1 cyc $ stack [
+  jux (density 2) $ brak $ sound "[jazz jazz jazz [~ BD BD SN]]" |+| shape "0.9",
+  sound "[gkick*4, jazz:7(3,8)]" |+| gain "1.2"
+]
+
+t1 cyc $ stack [
+  jux (density 2) $ brak $ sound "[jazz jazz jazz [~ BD BD SN], jazz:3*8]" |+| shape "0.9",
+  sound "[gkick*4, jazz:7(3,8)]" |+| gain "1.2"
+]
+
+t1 cyc $ stack [
+  slowspread ($) [chop 4, stut 8 0.1 0.1, jux (striate 16 .rev), jux(slow 2)] $ jux(density 2) $ every 4 (0.25 <~) $ jux (|+| speed "1.5")
+  $ brak $ sound "~ jvbass*20 ~ BD*4 ~ bass:3*3 sn ~"
+  |+| accelerate "[4 0 -3]/5"
+  |+| speed (slow 4 "[0 2 -2 5]")
+  |+| gain "0.9",
+  jux (density 2) $ brak $ sound "[jazz jazz jazz [~ BD BD SN], jazz:3*8]" |+| shape "0.9",
+  sound "[gkick*4, jazz:7(3,8)]" |+| gain "1.2"
+]
+
+hush
