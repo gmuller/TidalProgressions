@@ -1,4 +1,7 @@
 bps(185/120)
+-- 20150902
+-- Bad Haircut
+-- Grant Muller
 
 let cyc _ [] = silence
     cyc _ (p:[]) = p
