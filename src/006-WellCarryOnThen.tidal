@@ -1,0 +1,105 @@
+bps(125/120)
+-- 20151001
+-- Bad Haircut
+-- Grant Muller
+
+let up = speed . ((1.059466**)<$>)
+
+let cyc _ [] = silence
+    cyc _ (p:[]) = p
+    cyc now (p':p:_) = whenT (> (nextSam now)) (const p') p
+
+t1 cyc $ silence
+
+-- Back to coda
+t1 cyc $ stack [
+  weave' 16 (slow 4 $ striate 16 $ sound "amb:1 amb:2 sweetp guitloop sequential")
+  [(vowel "a e i o a" |+|), (up "3, 5 7, -1 -4" |+|), (pan (slow 6 (sinewave)) |+|)],
+  sound "rawpiano ~ rawpiano" |+| up "1, 3, 5",
+  sound "[rayoncut ~ rayoncut:2 rayoncut:5 ~ rayoncut:9 ~ rayoncut ~, rayoncut:3*9]",
+  sound "[jazz(4,9), jazz:4(2,9)]" |+| gain "1.2",
+  sound "kal2:1*9" |+| gain "1.2",
+  sound "bass1" |+| up (slow 4 ("1 1 3 -1")) |+| gain "1.2"
+]
+
+--Exit Breakdown
+t1 cyc $ stack [
+  weave' 16 (slow 4 $ striate 16 $ sound "amb:1 amb:2 sweetp guitloop sequential")
+  [(vowel "a e i o a" |+|), (up "3, 5 7, -1 -4" |+|), (pan (slow 6 (sinewave)) |+|)],
+  sound "rawpiano ~ rawpiano" |+| up "1, 3, 5",
+  sound "[rayoncut ~ rayoncut:2 rayoncut:5 ~ rayoncut:9 ~ rayoncut ~, rayoncut:3*9]",
+  sound "[jazz(4,9), jazz:4(2,9)]" |+| gain "1.2",
+  sound "kal2:1*9" |+| gain "1.2",
+  sound "bass1" |+| up (slow 4 ("1 1 3 -1")) |+| gain "1.2"
+]
+
+-- Breakdown 2
+t1 cyc $ stack [
+  sound "[rayoncut ~ rayoncut:2 rayoncut:5 ~ rayoncut:9 ~ rayoncut ~]",
+  sound "[jazz(4,9), jazz:4(2,9)]" |+| gain "1.2",
+  sound "kal2:1*9" |+| gain "1.2",
+  every 4 (density 0.5) $ sound (samples "rayoncut*9" (run 16)) |+| unit "c" |+| speed "4 8",
+  sound (samples "macD*18" (irand 16)) |+| unit "c" |+| speed (slow 3 "6 8 12 8") |+| gain "1.1",
+  slow 2 $ sound "bass2:0 ~ bass2:1 ~ ~ bass2:4 [~ bass2] ~ ~"
+]
+
+-- Breakdown 1
+t1 cyc $ stack [
+  sound "[rayoncut ~ rayoncut:2 rayoncut:5 ~ rayoncut:9 ~ rayoncut ~, rayoncut:3*9]",
+  sound "[jazz(4,9), jazz:4(2,9)]" |+| gain "1.2",
+  sound "kal2:1*9" |+| gain "1.2",
+  sound (samples "rayoncut*9" (run 16)) |+| unit "c" |+| speed "8",
+  slow 2 $ sound "bass2:0 ~ bass2:1 ~ ~ bass2:4 [~ bass2] ~ ~"
+]
+
+-- end of build
+t1 cyc $ stack [
+  weave' 16 (slow 4 $ striate 16 $ sound "amb:1 amb:2 sweetp guitloop sequential")
+  [(vowel "a e i o a" |+|), (up "3, 5 7, -1 -4" |+|), (pan (slow 6 (sinewave)) |+|)],
+  sound "rawpiano ~ rawpiano" |+| up "1, 3, 5",
+  sound "[rayoncut ~ rayoncut:2 rayoncut:5 ~ rayoncut:9 ~ rayoncut ~, rayoncut:3*9]",
+  sound "[jazz(4,9), jazz:4(2,9)]" |+| gain "1.2",
+  sound "bass1" |+| up (slow 4 ("1 1 3 -1")) |+| gain "1.2"
+]
+
+t1 cyc $ stack [
+  weave' 16 (slow 4 $ striate 16 $ sound "amb:1 amb:2 sweetp guitloop sequential")
+  [(vowel "a e i o a" |+|), (up "3, 5 7, -1 -4" |+|), (pan (slow 6 (sinewave)) |+|)],
+  sound "rawpiano ~ rawpiano" |+| up "1, 3, 5",
+  sound "[rayoncut ~ rayoncut:2 rayoncut:5 ~ rayoncut:9 ~ rayoncut ~, rayoncut:1*9]",
+  sound "[jazz(4,9), jazz:4(2,9)]" |+| gain "1.2",
+  sound "bass1" |+| up (slow 4 ("1 1 3 -1")) |+| gain "1.2"
+]
+
+t1 cyc $ stack [
+  weave' 16 (slow 4 $ striate 16 $ sound "amb:1 amb:2 sweetp guitloop sequential")
+  [(vowel "a e i o a" |+|), (up "3, 5 7, -1 -4" |+|), (pan (slow 6 (sinewave)) |+|)],
+  sound "rawpiano ~ rawpiano" |+| up "1, 3, 5",
+  sound "[rayoncut ~ rayoncut:2 rayoncut:5 ~ rayoncut:9 ~ rayoncut ~, rayoncut:1*9]",
+  sound "bass1" |+| up (slow 4 ("1 1 3 -1")) |+| gain "1.2"
+]
+
+t1 cyc $ stack [
+  weave' 16 (slow 4 $ striate 16 $ sound "amb:1 amb:2 sweetp sequential")
+  [(vowel "a e i o a" |+|), (up "3, 5 7, -1 -4" |+|), (pan (slow 6 (sinewave)) |+|)],
+  sound "rawpiano ~ rawpiano" |+| up "1, 3, 5",
+  sound "rayoncut ~ rayoncut:2 rayoncut:5 ~ rayoncut:9 ~ rayoncut ~",
+  sound "bass1" |+| up (slow 4 ("1 1 3 -1")) |+| gain "1.2"
+]
+
+t1 cyc $ stack [
+  weave' 16 (slow 4 $ striate 16 $ sound "amb:1 amb:2 sweetp sequential")
+  [(vowel "a e i o a" |+|), (up "3, 5 7, -1 -4" |+|), (pan (slow 6 (sinewave)) |+|)],
+  sound "rawpiano ~ rawpiano" |+| up "1, 3, 5",
+  sound "bass1" |+| up (slow 4 ("1 1 3 -1")) |+| gain "1.2"
+]
+
+-- Coda
+t1 cyc $ stack [
+  sound "rawpiano ~ rawpiano" |+| up "1, 3, 5" |+| gain "1.2"
+]
+
+t1 cyc $ stack [
+  weave' 16 (slow 4 $ striate' 32 0.05 $ sound "amb:1 amb:2 sweetp sequential")
+  [(vowel "a e i o a" |+|), (up "3, 5 7, -1 -4" |+|), (pan (slow 6 (sinewave)) |+|)]
+]
