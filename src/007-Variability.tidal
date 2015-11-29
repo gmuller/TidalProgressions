@@ -1,0 +1,69 @@
+cps(120/120)
+# or
+bps(140/120)
+
+let cyc _ [] = silence
+    cyc _ (p:[]) = p
+    cyc now (p':p:_) = whenT (> (nextSam now)) (const p') p
+
+t1 cyc $ stack [
+  chop 16 $ slow 2 $ sound (fit 4 ["psr:4", "twitch:0", "psr:9", "twitch:2", "psr:4", "sid:6", "sid"] "1 0 ~ [1*2 4 3 4*2] 1 ~"),
+  sound (fit 1 ["psr:3", "psr:6", "psr:12"] "0*12") # gain "1.1"
+]
+
+t1 cyc $ stack [
+  chop 16 $ slow 2 $ sound (fit 4 ["psr:4", "twitch:0", "psr:9", "twitch:2", "psr:4", "sid:6", "sid"] "1 0 ~ [1*2 4 3 4*2] 1 ~"),
+  sound (fit 1 ["psr:3", "psr:6", "psr:12"] "0*12") # gain "1.1",
+  sound "[jazz ~ jazz:3 jazz:6 [jazz*2 jazz:7*4]/2 [can:3*2 can:4*4]/2]" # shape "0.7" # gain "1.1",
+  slow 8 $ sound "bass1 bass1 bass1 bass1" # gain "1.4" # speed "1.1 1"
+]
+
+-- No Bass
+t1 cyc $ stack [
+  slow 2 $ sound "[[bass ~ [psr:2 psr:8] psr:8],[ ~ sn:3]*3,[psr:9*8]]" # gain "1.1",
+  iter 2 $ sound "[BD:3 BD:7 [gretsch:2 sid:2*4]/2 [bd sn*6 twitch:9*12]/3]",
+  sound (fit 1 ["psr:3", "psr:6", "psr:12"] "0*12") # gain "1.1",
+  chop 16 $ slow 2 $ sound (fit 4 ["psr:4", "twitch:0", "psr:9", "twitch:2", "psr:4", "sid:6", "sid"] "1 0 ~ [1*2 4 3 4*2] 1 ~")
+]
+
+bps(240/120)
+
+-- Slow Section
+t1 cyc $ stack [
+  slow 2 $ sound "[[ ~ sn:3]*3,[psr:9*8]]" # gain "1.1",
+  slow 2 $ sound "[psr:6 ~ [psr:3 psr:3] psr:3]" # gain "1.5" # speed "0.5",
+  iter 2 $ sound "[BD:3 BD:5 [gretsch:2 sid:2*4]/2 [bd sn*6 twitch:9*12]/3]",
+  sound (fit 1 ["psr:3", "psr:6", "psr:12"] "0*12") # gain "1.1",
+  slow 8 $ sound "bass1" # gain "1.5" # speed "1.1 1"
+]
+
+-- Slow section no Stuff
+t1 cyc $ stack [
+  slow 2 $ sound "[[ ~ sn:3]*3]" # gain "1.1",
+  slow 2 $ sound "[psr:3 ~ [psr:3 psr:3] psr:3]" # gain "1.5" # speed "0.5",
+  iter 2 $ sound "[BD:3 BD:7 [gretsch:2 sid:2*4]/2 [bd sn*6 twitch:9*12]/3]",
+  sound (fit 1 ["psr:3", "psr:6", "psr:12"] "0*12") # gain "1.1",
+  slow 8 $ sound "bass1 bass1 bass1 bass1" # gain "1.5" # speed "1.1 1"
+]
+
+t1 cyc $ stack [
+  slow 2 $ sound "[[bass ~ [psr:2 psr:8] psr:8],[ ~ sn:3]*3,[psr:9*8]]" # gain "1.1",
+  slow 2 $ sound "[psr:3 ~ [psr:3 psr:3] psr:3]" # gain "1.5" # speed "0.5",
+  iter 2 $ sound "[BD:3 BD:7 [gretsch:2 sid:2*4]/2 [bd sn*6 twitch:9*12]/3]",
+  chop 16 $ slow 2 $ sound (fit 4 ["psr:4", "twitch:0", "psr:9", "twitch:2", "psr:4", "sid:6", "sid"] "1 0 ~ [1*2 4 3 4*2] 1 ~"),
+  sound (fit 1 ["psr:3", "psr:6", "psr:12"] "0*12") # gain "1.1",
+  sound "[jazz ~ jazz:3 jazz:6 [jazz*2 jazz:7*4]/2 [can:3*2 can:4*4]/2]" # shape "0.7" # gain "1.1",
+  slow 8 $ sound "bass1 bass1 bass1 bass1" # gain "1.4" # speed "1.1 1"
+]
+
+bps(150/120)
+
+t1 cyc $ stack [
+  slow 4 $ striateL' 16 0.08 4 $ sound "amb:1" # gain "0.9",
+  chop 16 $ slow 2 $ sound (fit 4 ["psr:4", "twitch:0", "psr:9", "twitch:2", "psr:4", "sid:6", "sid"] "1 0 ~ [1*2 4 3 4*2] 1 ~"),
+  sound (fit 1 ["psr:3", "psr:6", "psr:12"] "0*12") # gain "1.1",
+  sound "[jazz ~ jazz:3 jazz:6 [jazz*2 jazz:7*4]/2 [can:3*2 can:4*4]/2]" # shape "0.5",
+  slow 8 $ sound "bass1 bass1 bass1 bass1" # gain "1.4" # speed "1 0.95"
+]
+
+t1 cyc $ silence
