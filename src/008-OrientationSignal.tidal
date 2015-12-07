@@ -1,0 +1,91 @@
+bps(124/120)
+-- 20150915 (Significant Edits 20151207)
+-- Orientation Signal
+-- Grant Muller
+
+let cyc _ [] = silence
+    cyc _ (p:[]) = p
+    cyc now (p':p:_) = whenT (> (nextSam now)) (const p') p
+
+t1 (xfadeIn 8) $ silence
+
+-- Channel 1 Teardown
+t1 (xfadeIn 16) $ stack [
+  sound "house2:2*4" # gain "1.3",
+  sound (samples "[[house2 house2] ~ house2 [~ house2*2?]]" (run 32))
+]
+
+-- Channel 1 Teardown 1
+t1 (xfadeIn 4) $ stack [
+  sound "house2:2*4" # gain "1.3",
+  sound "house2:8(3,8)",
+  sound "~ house2:15 ~ house2:28",
+  sound (samples "[[house2 house2] ~ house2 [~ house2*2?]]" (run 32)),
+  slowspread ($) [chop 16, density 0.5, stut 8 0.1 0.1, density 0.5, jux(rev)] $ slowcat [
+    slow 2 $ sound (samples "strollcut*32" (run 32)) # shape "0.7",
+    slow 2 $ sound (samples "cubacut*32" (run 32)),
+    slow 2 $ sound (samples "jdcut*32" (run 32)) # shape "0.7",
+    sound (samples "deadfunkloop16*16" (run 16)) # shape "0.7"
+    ]
+]
+
+-- Channel 1 Build 2
+t1 (xfadeIn 2) $ stack [
+  sound "house2:2*4" # gain "1.3",
+  sound "house2:8(3,8)",
+  sound "~ house2:15 ~ house2:28",
+  sound (samples "[[house2 house2] ~ house2 [~ house2*2?]]" (run 32)),
+  slow 4 $ sound (samples "hardbeat*16" ("2 3 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16")) # unit "c" # speed "4",
+  slowspread ($) [chop 16, density 0.5, stut 8 0.1 0.1, density 0.5, jux(rev)] $ slowcat [
+    slow 2 $ sound (samples "strollcut*32" (run 32)) # shape "0.7",
+    slow 2 $ sound (samples "cubacut*32" (run 32)),
+    slow 2 $ sound (samples "jdcut*32" (run 32)) # shape "0.7",
+    sound (samples "deadfunkloop16*16" (run 16)) # shape "0.7"
+    ]
+]
+
+-- Channel 1 Build 1
+t1 (xfadeIn 4) $ stack [
+  sound "house2:2*4" # gain "1.4",
+  sound "house2:8(3,8)",
+  sound "~ house2:6 ~ house2:7",
+  sound (samples "[[house2 house2] ~ house2 [~ house2*2?]]" (run 32)),
+  slow 4 $ sound (samples "hardbeat*16" ("2 3 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16")) # unit "c" # speed "4",
+  slow 2 $ sound (samples "strollcut*32" (run 32)) # shape "0.7" # gain "1.2"
+]
+
+-- Channel 1 Start
+t1 (xfadeIn 16) $ stack [
+  sound "house2:2*4" # gain "1.4",
+  sound "house2:8(3,8)",
+  sound "~ house2:6 ~ house2:7",
+  sound (samples "[[house2 house2] ~ house2 [~ house2*2?]]" (run 32)),
+  slow 4 $ sound (samples "hardbeat*16" ("2 3 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16")) # unit "c" # speed "4"
+]
+
+-- Channel 2 End Stack
+t2 (xfadeIn 4) $ stack [
+  slow 5 $ sound "[jvbass ! ! ! ~]*16" # up "{-2 1 -4 5}%1.5" # gain "1.3",
+  slow 10 $ striate' 32 0.05 $ sound "[pad:0 ! ! ~ !]*8" # up "-2 1 5" # gain "0.9",
+  slow 10 $ sound (samples "[kal2 ! ~ kal2 ~ kal2 ! ! ~ ~]*16" "0") # gain "1.4" # up "{-5}%5"
+]
+
+-- Channel 2 Middle
+t2 (xfadeIn 4) $ stack [
+  slow 5 $ sound "[jvbass ! ! ! ~]*16" # up "{-2 1 -4 5}%1.5" # gain "1.3",
+  slow 10 $ sound (samples "[kal2 ! ~ kal2 ~ kal2 ! ! ~ ~]*16" "0") # gain "1.4" # up "{-5}%5"
+]
+
+-- Channel 2 Start
+t2 (xfadeIn 4) $ stack [
+  iter 2 $ every 4 (jux(density 1.5)) $ slow 10 $ sound (samples "[kal2 ! ~ kal2 ~ kal2 ! ! ~ ~]*16" "0") # gain "1.4" # up "{-5}%5"
+]
+
+t2 (xfadeIn 4) $ silence
+
+-- Channel 3
+t3 (xfadeIn 1) $ stack [
+    foldEvery [5,9] (jux(density 1.5)) $ weave 10 (up "1 -2 4 -5") [striate 32 $ sound "moog*15"] # gain "0.8"
+]
+
+t3 cyc $ silence
